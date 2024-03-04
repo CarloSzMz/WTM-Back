@@ -8,7 +8,7 @@
 
                     <div class="col-lg-12">
 
-                        <h2 class="text-center">Crear Usuario</h2>
+                        <h2 class="text-center">Crear Stock</h2>
 
                     </div>
                 </div>

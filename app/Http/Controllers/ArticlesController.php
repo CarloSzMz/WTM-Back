@@ -99,7 +99,15 @@ class ArticlesController extends Controller
     public function edit(string $id)
     {
         //
+        $article = Article::join('categories', 'categories.id', '=', 'articles.category_id')
+            ->join('stock', 'stock.id', '=', 'articles.stock_id')
+            ->select(
+                'articles.name as ArticleName',
+                'articles.id as ArticleId',
+                'articles.*'
+            )->findOrFail($id);
 
+        return view('article.edit', compact('article'));
     }
 
     /**
@@ -108,7 +116,22 @@ class ArticlesController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
 
+        $article = Article::findOrFail($id);
+        //dd($request);
+        $article->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'url_img' => $request->url_img,
+            'discount' => $request->discount,
+        ]);
+
+        return redirect()->route('article.index')
+            ->with('success', 'Articulo actualizado');
     }
 
     /**
