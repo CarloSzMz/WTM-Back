@@ -4,7 +4,7 @@
 
 <body>
     <header class="bg-dark d-flex text-light align-items-center">
-       <a href="./"><img src="{{ asset('assets/img/logos/logo_white.png') }}" alt="logo" width="100px"></a> 
+       <a href="{{ route('users.index') }}"><img src="{{ asset('assets/img/logos/logo_white.png') }}" alt="logo" width="100px"></a> 
         <h1 class="white">Wear The Message</h1>
     </header>
     <div class="container mb-2">
