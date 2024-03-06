@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Basket;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -62,7 +63,17 @@ class UserController extends Controller
     public function show(string $id)
     {
         $user = User::where('id', $id)->first();
-        return view('users.show', compact('user'));
+
+        $basket = Basket::where('basket.user_id', $id)
+            ->join('articles', 'articles.id', '=', 'basket.article_id')
+            ->select(
+                'basket.*',
+                'articles.name as NombreArticulo'
+            )
+            ->get();
+
+        // dd($basket);
+        return view('users.show', compact('user', 'basket'));
     }
 
     /**

@@ -20,10 +20,10 @@ class Basket extends Model
         'user_id',
     ];
 
-    // Relación con tabla "articles"
+    // Relación con tabla "articles" usando sus stocks
     public function articles()
     {
-        return $this->hasMany(Article::class);
+        return $this->hasMany(Article::class)->using(Stock::class);
     }
 
     // Relación con tabla "users"

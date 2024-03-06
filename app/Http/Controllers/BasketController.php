@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
+use App\Models\Basket;
+use App\Models\Stock;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BasketController extends Controller
@@ -11,15 +15,37 @@ class BasketController extends Controller
      */
     public function index()
     {
-        //
+        $basket = Basket::get();
+        return view('basket.index', compact('basket'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($userid)
     {
-        //
+        /*
+        $basket = Basket::leftjoin('articles', 'basket.article_id', '=', 'articles.id')
+            ->leftjoin('stock', 'articles.stock_id', '=', 'stock.id')->where('article_id', 1)->first();
+        $articles = Article::get();
+                dd($basket);
+
+        */
+
+        $user = User::where('users.id', $userid)->first();
+
+        $basket = Basket::get();
+
+        $articles = Article::leftjoin('stock', 'stock.id', '=', 'articles.stock_id')
+            ->select(
+                'articles.*',
+                'stock.price as Precio'
+            )->get();
+
+        //dd($articles);
+
+
+        return view('basket.create', compact('basket', 'articles', 'user'));
     }
 
     /**
@@ -27,7 +53,41 @@ class BasketController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        //dd($request);
+        $request->validate([
+            'article_id' => 'required',
+            'quantity' => 'required',
+        ]);
+
+        $price = Article::where('articles.id', $request->article_id)
+            ->leftjoin('stock', 'stock.id', '=', 'articles.stock_id')
+            ->select(
+                'stock.price as Precio'
+            )->first();
+
+
+        // Convertir el precio y la cantidad a enteros
+        $price = (int)$price->Precio;
+        $quantity = (int)$request->quantity;
+
+        // Calcular el precio total
+        $total_price = $price * $quantity;
+
+        //dd($total_price);
+
+
+        Basket::create([
+            'article_id' => $request->article_id,
+            'quantity' => $request->quantity,
+            'total' => $total_price,
+            'user_id' => $request->user_id,
+        ]);
+
+        $userid = $request->user_id;
+
+        return redirect()->route('users.show', ['user' => $userid])
+            ->with('success', 'Articulo creado con éxito.');
     }
 
     /**
@@ -57,8 +117,12 @@ class BasketController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id, $userid)
     {
-        //
+        $basket = Basket::findOrFail($id);
+        $basket->delete();
+
+        return redirect()->route('users.show', ['user' => $userid])
+            ->with('success', 'Usuario eliminado');
     }
 }
