@@ -19,7 +19,7 @@
                             <select name="article_id" class="form-control $errors->has('article_id') ? 'error' : '' ">
                                 <option selected disabled>Seleccione Articulo:</option>
                                 @foreach ($articles as $item)
-                                    <option value={{ $item->id }}>{{ $item->name }} Precio: {{ $item->Precio }}
+                                    <option value={{ $item->id }}>{{ $item->name }}
                                     </option>
                                 @endforeach
 

@@ -104,6 +104,13 @@ class BasketController extends Controller
     public function edit(string $id)
     {
         //
+        $basket = Basket::join('articles', 'articles.id', '=', 'basket.article_id')
+            ->select(
+                'articles.name as NombreArticulo',
+                'basket.*'
+            )->findOrFail($id);
+
+        return view('basket.edit', compact('basket'));
     }
 
     /**
@@ -111,7 +118,38 @@ class BasketController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        
+        //dd($request);
+        $request->validate([
+            'quantity' => 'required',
+        ]);
+
+        $basket = Basket::findOrFail($id);
+        //dd($usuario);
+
+        $price = Article::where('articles.id', $request->article_id)
+            ->leftjoin('stock', 'stock.id', '=', 'articles.stock_id')
+            ->select(
+                'stock.price as Precio'
+            )->first();
+
+
+        // Convertir el precio y la cantidad a enteros
+        $price = (int)$price->Precio;
+        $quantity = (int)$request->quantity;
+
+        // Calcular el precio total
+        $total_price = $price * $quantity;
+
+        $basket->update([
+            'quantity' => $request->quantity,
+            'total' => $total_price,
+        ]);
+
+        $userid = $request->user_id;
+
+        return redirect()->route('users.show', ['user' => $userid])
+            ->with('success', 'Articulo creado con éxito.');
     }
 
     /**
