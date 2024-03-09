@@ -1,5 +1,6 @@
 @extends('layout.styles')
 
-<div class="container">
+
+<main class="py-4">
     @yield('content')
-</div>
+</main>

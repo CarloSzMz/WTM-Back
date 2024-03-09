@@ -5,6 +5,7 @@ use App\Http\Controllers\BasketController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,8 +20,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
+
+Auth::routes();
 
 //USERS
 Route::resource('users', UserController::class);
@@ -43,3 +46,7 @@ Route::resource('basket', BasketController::class);
 Route::get('/basket', [BasketController::class, 'index'])->name('basket.index');
 Route::delete('/basket/{basketid}/{userid}', [BasketController::class, 'destroy'])->name('basket.destroy');
 Route::get('/basket/create/{userid}', [BasketController::class, 'create'])->name('basket.create');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
