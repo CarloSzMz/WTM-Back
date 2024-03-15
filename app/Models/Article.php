@@ -41,8 +41,9 @@ class Article extends Model
     }
 
     // Relación con tabla "orders"
-    public function orders()
+    /*  public function orders_articles()
     {
         return $this->hasMany(Order::class);
     }
+    */
 }

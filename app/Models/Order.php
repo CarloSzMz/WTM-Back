@@ -25,11 +25,12 @@ class Order extends Model
     }
 
     // Relación con tabla "articles"
-    public function articles()
+    /* public function articles()
     {
         return $this->hasMany(Article::class);
     }
-
+    */
+    
     // Relación con tabla "order_lines"
     public function order_lines()
     {
