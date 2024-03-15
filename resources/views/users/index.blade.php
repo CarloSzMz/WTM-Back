@@ -47,10 +47,15 @@
                 </tbody>
             </table>
 
-            <button class="btn btn-info"><a href={{ route('users.create') }}>Crear Usuario</a></button><br><br><br>
-            <button class="btn btn-info"><a href={{ route('stock.index') }}>Ver Stock</a></button>
-            <button class="btn btn-info"><a href={{ route('category.index') }}>Ver Categoria</a></button>
-            <button class="btn btn-info"><a href={{ route('article.index') }}>Ver Articulos</a></button>
+            <button class="btn btn-secondary"><a href={{ route('users.create') }}
+                    class="text-decoration-none text-light">Crear
+                    Usuario</a></button> <br><br><br><br><br>
+            <button class="btn btn-info"><a href={{ route('stock.index') }} class="text-decoration-none text-dark">Ver
+                    Stock</a></button>
+            <button class="btn btn-info"><a href={{ route('category.index') }} class="text-decoration-none text-dark">Ver
+                    Categoria</a></button>
+            <button class="btn btn-info"><a href={{ route('article.index') }} class="text-decoration-none text-dark">Ver
+                    Articulos</a></button>
 
         </div>
     </div>

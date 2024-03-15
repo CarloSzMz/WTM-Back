@@ -12,13 +12,14 @@
 
 </body>
 -->
+
 <body>
     <div id="app ">
         <nav class="navbar navbar-expand-md navbar-light bg-secondary shadow-sm  text-light ">
-            <a href="{{ route('users.index') }}"><img src="{{ asset('assets/img/logos/logo_white.png') }}"
-                alt="logo" width="100px"></a>
+            <a href="{{ route('users.index') }}"><img src="{{ asset('assets/img/logos/logo_white.png') }}" alt="logo"
+                    width="100px"></a>
             <div class="container">
-                
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -65,14 +66,14 @@
             </div>
         </nav>
 
-        <main class="py-4 bg_color">
+        <main class="py-4" style="background-color: #E3F5F6; height: 100vh;">
             @include('layout.app')
         </main>
     </div>
     <!-- Footer -->
     <footer class="sticky-footer bg-secondary">
         <div class="container my-auto">
-            <div class="copyright text-center my-auto text-light">
+            <div class="copyright text-center my-auto text-light pt-4 pb-4">
                 <span>Copyright &copy; WTM-backend 2024</span>
             </div>
         </div>

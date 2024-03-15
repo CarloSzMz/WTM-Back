@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Basket;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -72,7 +73,23 @@ class UserController extends Controller
             )
             ->get();
 
+        /*
+            $orders = Order::where('orders.user_id', $id)
+            ->join('articles', 'articles.id', '=', 'orders.article_id')
+            ->select(
+                'orders.*',
+                'articles.name as NombreArticulo'
+            )
+            ->get();
+        */
+
+        // el pedido es todo lo q haya en basket, cuando se crea uno se vacia la cesta por lo q hay q ver basket.* que coincida con el user
+        // como haria para la cantidad? en caso de que el pedido se cancele?  se podrá editar el pedido? solo contiene articulos 
+        // crear tabla intermedia entre pedido y articulo para tener varios articulos en el mismo pedido
+
         // dd($basket);
+        //dd($orders);
+
         return view('users.show', compact('user', 'basket'));
     }
 
