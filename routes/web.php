@@ -56,3 +56,4 @@ Route::get('/basket/create/{userid}', [BasketController::class, 'create'])->name
 
 Route::resource('orders', Order::class);
 Route::get('/orders', [OrdersController::class, 'index'])->name('order.index');
+Route::get('/orders/create/{userid}', [OrdersController::class, 'create'])->name('orders.create');

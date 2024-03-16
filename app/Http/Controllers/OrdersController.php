@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Basket;
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
@@ -14,19 +16,42 @@ class OrdersController extends Controller
     {
         //
         $orders = Order::join('users', 'users.id', '=', 'orders.user_id')
-        ->select(
-            'users.name as NombreUsuario',
-            'orders.*',
-        )->get();
+            ->select(
+                'users.name as NombreUsuario',
+                'orders.*',
+            )->get();
         return view('order.index', compact('orders'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($userid)
     {
         //
+        $basket = Basket::where('user_id', $userid)
+            ->join('articles', 'articles.id', '=', 'basket.article_id')
+            ->select(
+                'articles.name as NombreArticulo',
+                'articles.url_img as ImagenProducto',
+                'articles.discount as Descuento',
+                'basket.*'
+            )
+            ->get();
+
+        $total_price = 0;
+
+        foreach ($basket as $item) {
+            $total_price += $item->total;
+        }
+
+        $user = User::where('id', $userid)->first();
+
+        dd($basket, $total_price, $user);
+
+        $orders = Order::get();
+
+        return view('order.create', compact('basket', 'orders', 'user'));
     }
 
     /**
@@ -67,5 +92,12 @@ class OrdersController extends Controller
     public function destroy(string $id)
     {
         //
+
+        //necesita referencias a las tablas a las que se refiere
+        $order = Order::findOrFail($id);
+        $order->delete();
+
+        return redirect()->route('order.index')
+            ->with('success', 'order eliminado');
     }
 }

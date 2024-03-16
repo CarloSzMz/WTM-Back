@@ -45,7 +45,8 @@
                     </table>
                     <button class="btn btn-info"><a href="{{ route('basket.create', $user->id) }}"
                             style="text-decoration: none">Añadir a la cesta</a></button>
-                    <button class="btn btn-info"><a href="" style="text-decoration: none">Crear Pedido</a></button>
+                    <button class="btn btn-info"><a href="{{ route('orders.create', $user->id) }}"
+                            style="text-decoration: none">Crear Pedido</a></button>
                 </div>
             </div>
 

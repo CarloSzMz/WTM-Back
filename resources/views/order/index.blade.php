@@ -5,8 +5,8 @@
             <table class="table table-striped table-dark pb-5">
                 <thead class="thead-dark">
                     <th>ID</th>
-                    <th>User</th>
-                    <th>Total_price</th>
+                    <th>Usuario</th>
+                    <th>Precio Total (€)</th>
                     <th>Opciones</th>
                 </thead>
                 <tbody>
@@ -16,7 +16,7 @@
                             <td>{{ $order->NombreUsuario }}</td>
                             <td>{{ $order->total_price }}</td>
                             <td>
-                                <form action="" method="POST">
+                                <form action="{{ route('orders.destroy', $order->id) }}" method="POST">
                                     <a class="btn" href="">
                                         <i class="fas fa-eye text-success fa-lg"></i>
                                     </a>
@@ -33,7 +33,7 @@
             </table>
 
             <button class="btn btn-info"><a href={{ route('users.index') }} class="text-decoration-none text-dark">Ver
-                    Usuarios</a></button> 
+                    Usuarios</a></button>
             <button class="btn btn-info"><a href={{ route('stock.index') }} class="text-decoration-none text-dark">Ver
                     Stock</a></button>
             <button class="btn btn-info"><a href={{ route('category.index') }} class="text-decoration-none text-dark">Ver
