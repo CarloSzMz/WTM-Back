@@ -17,7 +17,10 @@ return new class extends Migration
             $table->timestamps();
 
             $table->unsignedBigInteger('order_id');
-            $table->foreign('order_id')->references('id')->on('orders');
+            $table->foreign('order_id')->references('id')->on('orders')
+                ->constrained()
+                ->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
         });
     }
 
