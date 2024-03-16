@@ -40,10 +40,9 @@ class Article extends Model
         return $this->hasMany(Category::class);
     }
 
-    // Relación con tabla "orders"
-    /*  public function orders_articles()
+    // Relación con tabla "orders_articles"
+    public function orders_articles()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order_Article::class);
     }
-    */
 }

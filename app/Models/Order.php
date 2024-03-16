@@ -14,8 +14,8 @@ class Order extends Model
     protected $table = "orders";
 
     protected $fillable = [
-        'article_id',
         'user_id',
+        'total_price',
     ];
 
     // Relación con tabla "users"
@@ -24,13 +24,13 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    // Relación con tabla "articles"
-    /* public function articles()
+    // Relación con tabla "orders_articles"
+    public function orders_articles()
     {
-        return $this->hasMany(Article::class);
+        return $this->hasMany(Order_Article::class);
     }
-    */
-    
+
+
     // Relación con tabla "order_lines"
     public function order_lines()
     {
