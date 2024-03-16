@@ -73,15 +73,13 @@ class UserController extends Controller
             )
             ->get();
 
-        /*
-            $orders = Order::where('orders.user_id', $id)
-            ->join('articles', 'articles.id', '=', 'orders.article_id')
+
+        $orders = Order::where('orders.user_id', $id)
             ->select(
                 'orders.*',
-                'articles.name as NombreArticulo'
             )
             ->get();
-        */
+
 
         // el pedido es todo lo q haya en basket, cuando se crea uno se vacia la cesta por lo q hay q ver basket.* que coincida con el user
         // como haria para la cantidad? en caso de que el pedido se cancele?  se podrá editar el pedido? solo contiene articulos 
@@ -90,7 +88,7 @@ class UserController extends Controller
         // dd($basket);
         //dd($orders);
 
-        return view('users.show', compact('user', 'basket'));
+        return view('users.show', compact('user', 'basket','orders'));
     }
 
     /**

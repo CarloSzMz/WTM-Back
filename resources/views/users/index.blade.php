@@ -56,6 +56,8 @@
                     Categoria</a></button>
             <button class="btn btn-info"><a href={{ route('article.index') }} class="text-decoration-none text-dark">Ver
                     Articulos</a></button>
+            <button class="btn btn-info"><a href={{ route('order.index') }} class="text-decoration-none text-dark">Ver
+                    Pedidos</a></button>
 
         </div>
     </div>

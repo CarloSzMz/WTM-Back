@@ -17,7 +17,7 @@
                         <thead class="thead-dark">
                             <th>Articulo</th>
                             <th>Cantidad</th>
-                            <th>Precio total</th>
+                            <th>Precio total (€)</th>
                             <th>Opciones</th>
                         </thead>
                         <tbody>
@@ -27,7 +27,8 @@
                                     <td> {{ $producto->quantity }}</td>
                                     <td> {{ $producto->total }}</td>
                                     <td>
-                                        <form action="{{ route('basket.destroy', [$producto->id, $user->id]) }}" method="POST">
+                                        <form action="{{ route('basket.destroy', [$producto->id, $user->id]) }}"
+                                            method="POST">
                                             <a class="btn" href="{{ route('basket.edit', $producto->id) }}">
                                                 <i class="fas fa-edit fa-lg text-primary"></i>
                                             </a>
@@ -44,6 +45,43 @@
                     </table>
                     <button class="btn btn-info"><a href="{{ route('basket.create', $user->id) }}"
                             style="text-decoration: none">Añadir a la cesta</a></button>
+                    <button class="btn btn-info"><a href="" style="text-decoration: none">Crear Pedido</a></button>
+                </div>
+            </div>
+
+
+            <!--Pedidos-->
+
+            <div class="container pb-2">
+                <h3>Pedidos:</h3>
+                <div class="container p3">
+                    <table class="table table-striped table-dark">
+                        <thead class="thead-dark">
+                            <th>Id_Pedido</th>
+                            <th>Precio total (€)</th>
+                            <th>Opciones</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($orders as $order)
+                                <tr>
+                                    <td> {{ $order->id }}</td>
+                                    <td> {{ $order->total_price }}</td>
+                                    <td>
+                                        <form action="" method="">
+                                            <a class="btn" href="">
+                                                <i class="fas fa-eye text-success fa-lg"></i>
+                                            </a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn" type="submit">
+                                                <i class="fas fa-trash text-danger fa-lg"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <button class="btn btn-dark"><a href="./">Volver</a></button>

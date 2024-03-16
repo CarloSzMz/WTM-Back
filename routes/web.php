@@ -3,8 +3,10 @@
 use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\UserController;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +26,9 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 //USERS
 Route::resource('users', UserController::class);
@@ -47,6 +52,7 @@ Route::get('/basket', [BasketController::class, 'index'])->name('basket.index');
 Route::delete('/basket/{basketid}/{userid}', [BasketController::class, 'destroy'])->name('basket.destroy');
 Route::get('/basket/create/{userid}', [BasketController::class, 'create'])->name('basket.create');
 
-Auth::routes();
+//Orders
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('orders', Order::class);
+Route::get('/orders', [OrdersController::class, 'index'])->name('order.index');

@@ -24,13 +24,6 @@ class BasketController extends Controller
      */
     public function create($userid)
     {
-        /*
-        $basket = Basket::leftjoin('articles', 'basket.article_id', '=', 'articles.id')
-            ->leftjoin('stock', 'articles.stock_id', '=', 'stock.id')->where('article_id', 1)->first();
-        $articles = Article::get();
-                dd($basket);
-
-        */
 
         $user = User::where('users.id', $userid)->first();
 
@@ -43,7 +36,6 @@ class BasketController extends Controller
             )->get();
 
         //dd($articles);
-
 
         return view('basket.create', compact('basket', 'articles', 'user'));
     }
@@ -118,7 +110,7 @@ class BasketController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
+
         //dd($request);
         $request->validate([
             'quantity' => 'required',
