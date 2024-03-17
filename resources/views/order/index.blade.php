@@ -16,7 +16,7 @@
                             <td>{{ $order->NombreUsuario }}</td>
                             <td>{{ $order->total_price }}</td>
                             <td>
-                                <form action="{{ route('orders.destroy', $order->id) }}" method="POST">
+                                <form action="{{ route('order.destroy', $order->id) }}" method="POST">
                                     <a class="btn" href="">
                                         <i class="fas fa-eye text-success fa-lg"></i>
                                     </a>
