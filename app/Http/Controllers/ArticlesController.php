@@ -65,7 +65,6 @@ class ArticlesController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'url_img' => $request->url_img,
-            'discount' => $request->discount,
             'category_id' => $request->category_id,
             'stock_id' => $request->stock_id,
         ]);
@@ -127,7 +126,6 @@ class ArticlesController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'url_img' => $request->url_img,
-            'discount' => $request->discount,
         ]);
 
         return redirect()->route('article.index')

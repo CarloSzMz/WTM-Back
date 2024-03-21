@@ -9,7 +9,6 @@
             <p>Productos en stock: {{ $article->Cantidad }}</p>
             <img src="{{ asset("assets/img/camisetas/$article->url_img ") }}" alt="imgen" width="100px" class="center"><br>
             <p>Precio: {{ $article->Precio }}€</p>
-            <p>Descuento: {{ $article->discount }}%</p>
             <button><a href="./">Volver</a></button>
         </div>
     </div>

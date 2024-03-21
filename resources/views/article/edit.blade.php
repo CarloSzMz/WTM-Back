@@ -63,20 +63,6 @@
                                 </div>
                             </div>
 
-                            <!-- Descuento -->
-                            <div class="col-xs-12 col-sm-12 col-md-12 p-3">
-                                <div class="form-group">
-                                    <strong>Descuento %:</strong>
-                                    <input type="number" name="discount"
-                                        class="form-control $errors->has('discount') ? 'error' : '' "
-                                        placeholder="{{ $article->discount }}" value="{{ $article->discount }}"">
-                                    <!-- Error Nombre Requerido -->
-                                    @if ($errors->has('discount'))
-                                        <p class="text-danger"> {{ $errors->first('discount') }}</p>
-                                    @endif
-                                </div>
-                            </div>
-
                         </div>
                     </div>
 

@@ -6,7 +6,6 @@
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Desc</th>
-                <th>Descuento</th>
                 <th>Categoria</th>
                 <th>Stock Actual</th>
                 <th>Opciones</th>
@@ -17,7 +16,6 @@
                         <td>{{ $article->id }}</td>
                         <td>{{ $article->name }}</td>
                         <td>{{ $article->description }}</td>
-                        <td>{{ $article->discount }}%</td>
                         <td>{{ $article->Categoria }}</td>
                         <td>{{ $article->Cantidad }}</td>
 
