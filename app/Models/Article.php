@@ -17,7 +17,6 @@ class Article extends Model
         'name',
         'description',
         'url_img',
-        'discount',
         'stock_id',
         'category_id',
     ];

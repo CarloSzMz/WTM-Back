@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('url_img')->default('');
-            $table->integer('discount')->default('0');
             $table->timestamps();
 
             $table->unsignedBigInteger('stock_id');
