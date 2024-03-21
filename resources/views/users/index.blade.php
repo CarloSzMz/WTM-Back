@@ -8,7 +8,6 @@
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Email</th>
-                    <th>País</th>
                     <th>Provincia</th>
                     <th>Calle</th>
                     <th>Tipo</th>
@@ -21,7 +20,6 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->surname }}</td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $user->pais }}</td>
                             <td>{{ $user->provincia }}</td>
                             <td>{{ $user->calle }}</td>
                             @if ($user->tipo == 0)

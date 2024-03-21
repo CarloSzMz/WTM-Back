@@ -39,7 +39,6 @@ class UserController extends Controller
             'surname' => 'required',
             'email' => 'required',
             'password' => ['required', 'min:8'],
-            'pais' => 'required',
             'provincia' => 'required',
             'calle' => 'required',
             'tipo' => 'required',
@@ -50,7 +49,6 @@ class UserController extends Controller
             'surname' => $request->surname,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'pais' => $request->pais,
             'provincia' => $request->provincia,
             'calle' => $request->calle,
             'tipo' => $request->tipo,
@@ -90,7 +88,7 @@ class UserController extends Controller
         // dd($basket);
         //dd($orders);
 
-        return view('users.show', compact('user', 'basket','orders'));
+        return view('users.show', compact('user', 'basket', 'orders'));
     }
 
     /**
@@ -123,7 +121,6 @@ class UserController extends Controller
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
-            'pais' => $request->pais,
             'provincia' => $request->provincia,
             'calle' => $request->calle,
             'tipo' => $request->tipo,

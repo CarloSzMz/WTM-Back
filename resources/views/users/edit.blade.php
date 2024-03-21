@@ -60,20 +60,7 @@
                                 </div>
                             </div>
 
-                            <!-- Pais -->
-                            <div class="col-xs-12 col-sm-12 col-md-12 p-3">
-                                <div class="form-group">
-                                    <strong>Pais:</strong>
-                                    <input type="text" name="pais" class="form-control" placeholder="Pais"
-                                        value="{{ $user->pais }}">
-
-                                    <!-- Error Nombre Requerido -->
-                                    @if ($errors->has('pais'))
-                                        <p class="text-danger"> {{ $errors->first('pais') }}</p>
-                                    @endif
-                                </div>
-                            </div>
-
+                          
                             <!-- Provincia -->
                             <div class="col-xs-12 col-sm-12 col-md-12 p-3">
                                 <div class="form-group">

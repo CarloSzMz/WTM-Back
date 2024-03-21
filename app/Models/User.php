@@ -28,7 +28,6 @@ class User extends Authenticatable
         'password',
         'calle',
         'provincia',
-        'pais',
         'tipo',
     ];
 
