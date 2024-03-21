@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Basket;
 use App\Models\Order;
 use App\Models\Order_Article;
+use App\Models\Stock;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -86,6 +88,17 @@ class OrdersController extends Controller
                 'order_id' => $pedido->id,
                 'article_id' => $producto['article_id'],
                 'quantity' => $producto['quantity'],
+            ]);
+
+            $stock = Stock::where('articles.id', $producto['article_id'])
+                ->leftjoin('articles', 'articles.stock_id', '=', 'stock.id')
+                ->select(
+                    'stock.*'
+                )
+                ->first();
+            $resta = $stock->quantity - $producto['quantity'];
+            $stock->update([
+                'quantity' => $resta
             ]);
         }
 

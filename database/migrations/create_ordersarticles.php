@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('order_id')->references('id')->on('orders')
                 ->constrained()
                 ->onDelete('CASCADE')
-                ->onUpdate('CASCADE');;
+                ->onUpdate('CASCADE');
             $table->unsignedBigInteger('article_id');
             $table->foreign('article_id')->references('id')->on('articles');
             $table->integer('quantity');

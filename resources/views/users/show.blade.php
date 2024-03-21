@@ -68,16 +68,9 @@
                                     <td> {{ $order->id }}</td>
                                     <td> {{ $order->total_price }}</td>
                                     <td>
-                                        <form action="" method="">
-                                            <a class="btn" href="">
-                                                <i class="fas fa-eye text-success fa-lg"></i>
-                                            </a>
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn" type="submit">
-                                                <i class="fas fa-trash text-danger fa-lg"></i>
-                                            </button>
-                                        </form>
+                                        <a class="btn" href="">
+                                            <i class="fas fa-eye text-success fa-lg"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
