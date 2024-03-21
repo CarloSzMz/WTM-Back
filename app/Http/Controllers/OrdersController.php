@@ -37,7 +37,6 @@ class OrdersController extends Controller
             ->select(
                 'articles.name as NombreArticulo',
                 'articles.url_img as ImagenProducto',
-                'articles.discount as Descuento',
                 'basket.*'
             )
             ->get();
@@ -72,6 +71,7 @@ class OrdersController extends Controller
         Order::create([
             'user_id' => $request->user_id,
             'total_price' => $request->total_price,
+            'status' => 1
         ]);
 
         $pedido = Order::where('user_id', $request->user_id)->latest()->first();
@@ -122,7 +122,7 @@ class OrdersController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        //no se puede editar el pedido
     }
 
     /**
@@ -130,7 +130,7 @@ class OrdersController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //no se puede editar el pedido
     }
 
     /**

@@ -7,6 +7,7 @@
                     <th>ID</th>
                     <th>Usuario</th>
                     <th>Precio Total (€)</th>
+                    <th>Estado</th>
                     <th>Opciones</th>
                 </thead>
                 <tbody>
@@ -15,6 +16,11 @@
                             <td>{{ $order->id }}</td>
                             <td>{{ $order->NombreUsuario }}</td>
                             <td>{{ $order->total_price }}</td>
+                            @if ($order->status == 1)
+                                <td>Recibido</td>
+                            @else
+                                <td>Enviado</td>
+                            @endif
                             <td>
                                 <form action="{{ route('order.destroy', $order->id) }}" method="POST">
                                     <a class="btn" href="">

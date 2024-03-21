@@ -2,7 +2,7 @@
 @section('content')
     <div class="container mt-4">
         <div class="d-block mx-auto mb-2 mt-4">
-            <h2> Página de {{ $user->name }} {{$user->surname}}</h2>
+            <h2> Página de {{ $user->name }} {{ $user->surname }}</h2>
             <h4>Email: {{ $user->email }}</h4>
             <h5>Provincia: {{ $user->provincia }}</h5>
             <h5>Calle: {{ $user->calle }}</h5>
@@ -59,6 +59,7 @@
                         <thead class="thead-dark">
                             <th>Id_Pedido</th>
                             <th>Precio total (€)</th>
+                            <th>Estado</th>
                             <th>Opciones</th>
                         </thead>
                         <tbody>
@@ -66,6 +67,11 @@
                                 <tr>
                                     <td> {{ $order->id }}</td>
                                     <td> {{ $order->total_price }}</td>
+                                    @if ($order->status == 1)
+                                        <td>Recibido</td>
+                                    @else
+                                        <td>Enviado</td>
+                                    @endif
                                     <td>
                                         <a class="btn" href="">
                                             <i class="fas fa-eye text-success fa-lg"></i>
