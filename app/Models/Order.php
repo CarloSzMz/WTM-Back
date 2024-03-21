@@ -16,6 +16,7 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'total_price',
+        'status',
     ];
 
     // Relación con tabla "users"
@@ -28,13 +29,6 @@ class Order extends Model
     public function orders_articles()
     {
         return $this->hasMany(Order_Article::class);
-    }
-
-
-    // Relación con tabla "order_lines"
-    public function order_lines()
-    {
-        return $this->hasMany(Order_Line::class);
     }
 
     // Relación con tabla "valorations"
