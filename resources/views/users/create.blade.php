@@ -29,6 +29,20 @@
                         </div>
                     </div>
 
+                    <!-- Surname -->
+                    <div class="col-xs-12 col-sm-12 col-md-12 p-3">
+                        <div class="form-group">
+                            <strong>Apellidos:</strong>
+                            <input type="text" name="surname"
+                                class="form-control $errors->has('surname') ? 'error' : '' " placeholder="Apellidos">
+
+                            <!-- Error Nombre Requerido -->
+                            @if ($errors->has('surname'))
+                                <p class="text-danger"> {{ $errors->first('surname') }}</p>
+                            @endif
+                        </div>
+                    </div>
+
                     <!-- E-mail -->
                     <div class="col-xs-12 col-sm-12 col-md-12 p-3">
                         <div class="form-group">
