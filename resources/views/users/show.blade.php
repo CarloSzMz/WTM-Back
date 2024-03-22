@@ -73,7 +73,7 @@
                                         <td>Enviado</td>
                                     @endif
                                     <td>
-                                        <a class="btn" href="">
+                                        <a class="btn" href="{{ route('order.show', $order->id) }}">
                                             <i class="fas fa-eye text-success fa-lg"></i>
                                         </a>
                                     </td>

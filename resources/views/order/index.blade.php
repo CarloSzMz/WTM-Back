@@ -23,7 +23,7 @@
                             @endif
                             <td>
                                 <form action="{{ route('order.destroy', $order->id) }}" method="POST">
-                                    <a class="btn" href="">
+                                    <a class="btn" href="{{ route('order.show', $order->id) }}">
                                         <i class="fas fa-eye text-success fa-lg"></i>
                                     </a>
                                     @csrf

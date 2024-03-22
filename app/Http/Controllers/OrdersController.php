@@ -115,6 +115,26 @@ class OrdersController extends Controller
     public function show(string $id)
     {
         //
+        $order = Order::where('orders.id', $id)
+            ->join('users', 'users.id', '=', 'user_id')
+            ->select(
+                'orders.*',
+                'users.*'
+            )
+            ->first();  //Pedido
+        //dd($order);
+        $orderArticles = Order_Article::where('order_id', $id)
+            ->join('articles', 'articles.id', '=', 'article_id')
+            ->leftjoin('stock', 'stock.id', '=', 'articles.stock_id')
+            ->select(
+                'orders_articles.*',
+                'articles.*',
+                'stock.price'
+            )
+            ->get();  //Articulos del pedido
+        //dd($orderArticles);
+
+        return view('order.show', compact('order', 'orderArticles'));
     }
 
     /**
