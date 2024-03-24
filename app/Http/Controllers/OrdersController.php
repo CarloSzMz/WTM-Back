@@ -119,7 +119,8 @@ class OrdersController extends Controller
             ->join('users', 'users.id', '=', 'user_id')
             ->select(
                 'orders.*',
-                'users.*'
+                'users.*',
+                'orders.id as OrderId'
             )
             ->first();  //Pedido
         //dd($order);
