@@ -65,6 +65,17 @@
                 </div>
             </div>
         </nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <!-- Navbar content -->
+            <div class="container-md">
+                <a class="navbar-brand" href="{{ route('users.index') }} ">Usuarios</a>
+                <a class="navbar-brand" href="{{ route('article.index') }}">Articulos</a>
+                <a class="navbar-brand" href="{{ route('stock.index') }}">Stock</a>
+                <a class="navbar-brand" href="{{ route('category.index') }}">Categorias</a>
+                <a class="navbar-brand" href="{{ route('order.index') }}">Pedidos</a>
+
+            </div>
+        </nav>
 
         <main class="py-4" style="background-color: #E3F5F6; height: 100vh;">
             @include('layout.app')

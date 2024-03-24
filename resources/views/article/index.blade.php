@@ -41,7 +41,5 @@
 
         <button class="btn btn-info"><a href={{ route('articles.create') }}>Crear Articulo</a></button>
 
-
-        <button class="btn btn-info"><a href={{ route('users.index') }}>Ver Usuarios</a></button>
     </div>
 @endsection

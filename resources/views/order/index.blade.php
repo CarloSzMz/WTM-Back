@@ -38,15 +38,6 @@
                 </tbody>
             </table>
 
-            <button class="btn btn-info"><a href={{ route('users.index') }} class="text-decoration-none text-dark">Ver
-                    Usuarios</a></button>
-            <button class="btn btn-info"><a href={{ route('stock.index') }} class="text-decoration-none text-dark">Ver
-                    Stock</a></button>
-            <button class="btn btn-info"><a href={{ route('category.index') }} class="text-decoration-none text-dark">Ver
-                    Categoria</a></button>
-            <button class="btn btn-info"><a href={{ route('article.index') }} class="text-decoration-none text-dark">Ver
-                    Articulos</a></button>
-
         </div>
     </div>
 @endsection
