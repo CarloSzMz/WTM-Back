@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('provincia');
             $table->string('calle');
-            $table->integer('tipo');
+            $table->integer('tipo')->default(0);
             $table->timestamps();
         });
     }
