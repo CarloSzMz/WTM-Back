@@ -9,6 +9,17 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     //
+
+    public function users()
+    {
+        $users = User::get();
+
+        return response()->json([
+            "data" => $users,
+        ]);
+    }
+
+
     public function register(Request $request)
     {
 
@@ -80,7 +91,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function get_user(Request $request)
+    public function get_user()
     {
 
         //return response()->json($request->user());
@@ -95,7 +106,13 @@ class AuthController extends Controller
         ]);
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
+        auth()->user()->token()->revoke();
+
+        response()->json([
+            "status" => true,
+            "message" => "user logged out"
+        ]);
     }
 }
