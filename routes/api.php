@@ -23,13 +23,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
+
+//usuarios
 Route::get('users', [AuthController::class, 'users']);
 
+//articulos
+Route::get('productos',[AuthController::class,'productos']);
 
 Route::group([
     "middleware" => ["auth:api"]
 ], function(){
     Route::get('get_user', [AuthController::class, 'get_user']);
+    Route::post('add_carrito',[AuthController::class,'add_carrito']);
     Route::get('logout', [AuthController::class, 'logout']);
 
 });
