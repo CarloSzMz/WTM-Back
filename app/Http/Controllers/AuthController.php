@@ -38,22 +38,15 @@ class AuthController extends Controller
         $request->validate([
 
             'name' => 'required|string',
-            'surname' => 'required|string',
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string|confirmed',
-            'calle' => 'required|string',
-            'provincia' => 'required|string',
 
         ]);
 
         $user = new User([
-
             'name' => $request->name,
-            'surname' => $request->surname,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'calle' => $request->calle,
-            'provincia' => $request->provincia,
         ]);
 
         $user->save();
@@ -61,7 +54,6 @@ class AuthController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Successfully created user!'
-
         ]);
     }
 
@@ -125,7 +117,7 @@ class AuthController extends Controller
     {
         auth()->user()->token()->revoke();
 
-        response()->json([
+        return response()->json([
             "status" => true,
             "message" => "user logged out"
         ]);
