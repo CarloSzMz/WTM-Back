@@ -173,4 +173,59 @@ class AuthController extends Controller
             "cesta" => $basket
         ]);
     }
+
+    //VER LOS PRODUCTOS DEL CARRITO (GET) -> NECESITA TOKEN
+    public function ver_carrito()
+    {
+
+        $user = Auth::user();
+        $basket = Basket::where('basket.user_id', $user->id)
+            ->join('articles', 'articles.id', '=', 'basket.article_id')
+            ->select(
+                'basket.*',
+                'basket.id as IdCesta',
+                'articles.name as NombreArticulo',
+                'articles.url_img as ImgArticulo',
+            )
+            ->get();
+
+        return response()->json([
+            "data" => $basket,
+        ]);
+    }
+
+    //ACTUALIZAR DATOS DEL USUARIO (PUT) -> NECESITA TOKEN
+    public function update_user(Request $request)
+    {
+        $user = Auth::user();
+
+        $usuario = User::where('id', $user->id);
+
+        $usuario->update([
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'provincia' => $request->provincia,
+            'calle' => $request->calle,
+        ]);
+
+        return response()->json([
+            "message" => "usuario actualizado con éxito",
+            "data" => $user,
+        ]);
+    }
+
+    //ELIMINAR PRODUCTO DEL CARRITO (POST) -> NECESITA TOKEN
+    public function eliminarProdCarrito(Request $request)
+    {
+        $user = Auth::user();
+
+        $basket = Basket::findOrFail($request->id);
+        $basket->delete();
+
+        return response()->json([
+            "message" => "cesta del usuario actualizada con éxito",
+            "user" => $user,
+            "basket" => $basket
+        ]);
+    }
 }
