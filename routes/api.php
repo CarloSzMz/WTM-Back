@@ -36,7 +36,10 @@ Route::group([
     Route::get('get_user', [AuthController::class, 'get_user']);
     Route::get('ver_carrito', [AuthController::class, 'ver_carrito']);
     Route::post('add_carrito', [AuthController::class, 'add_carrito']);
+    Route::put('update_carrito', [AuthController::class, 'update_carrito']);
     Route::get('logout', [AuthController::class, 'logout']);
     Route::put('update_user', [AuthController::class, 'update_user']);
     Route::delete('eliminarProdCarrito', [AuthController::class, 'eliminarProdCarrito']);
+    Route::get('ver_pedidos', [AuthController::class, 'ver_pedidos']);
+    Route::get('ver_Detalle_pedido', [AuthController::class, 'ver_Detalle_pedido']);
 });

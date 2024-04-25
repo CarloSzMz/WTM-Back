@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Basket;
+use App\Models\Order;
+use App\Models\Order_Article;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -174,6 +176,35 @@ class AuthController extends Controller
         ]);
     }
 
+    //EDITA PRODUCTOS DEL CARRITO (PUT) -> NECESITA TOKEN
+    public function update_carrito(Request $request)
+    {
+        $user = Auth::user();
+
+        //dd($request);
+        $request->validate([
+            'basquet_id' => 'required',
+            'quantity' => 'required',
+        ]);
+
+        $basket = Basket::where('id', $request->basquet_id)
+            ->where('user_id', $user->id)
+            ->firstOrFail();
+
+        $base_price = $basket->total / $basket->quantity;
+        $new_total = $base_price * $request->quantity;
+
+        $basket->update([
+            'quantity' => $request->quantity,
+            'total' => $new_total
+        ]);
+
+        return response()->json([
+            "message" => "articulo de la cesta actualizado con éxito",
+            "nuevoCarro" => $basket,
+        ]);
+    }
+
     //VER LOS PRODUCTOS DEL CARRITO (GET) -> NECESITA TOKEN
     public function ver_carrito()
     {
@@ -193,6 +224,55 @@ class AuthController extends Controller
             "data" => $basket,
         ]);
     }
+
+    //VER LOS PEDIDOS (GET) -> NECESITA TOKEN
+    public function ver_pedidos()
+    {
+
+        $user = Auth::user();
+
+        $orders = Order::where('user_id', $user->id)
+            ->get();
+
+        return response()->json([
+            "data" => $orders,
+        ]);
+    }
+
+    //VER LOS DETALLES DE UN PEDIDO (GET) -> NECESITA TOKEN
+    public function ver_Detalle_pedido(Request $request)
+    {
+
+        $user = Auth::user();
+
+        $request->validate([
+            'order_id' => 'required',
+        ]);
+
+        $orderArticles = Order_Article::where('order_id', $request->order_id)
+            ->join('articles', 'articles.id', '=', 'article_id')
+            ->leftjoin('stock', 'stock.id', '=', 'articles.stock_id')
+            ->select(
+                'orders_articles.*',
+                'articles.*',
+                'stock.price'
+            )
+            ->get();
+        $orders = Order::where('order.user_id', $user->id)
+            ->join('articles', 'articles.id', '=', 'basket.article_id')
+            ->select(
+                'basket.*',
+                'basket.id as IdCesta',
+                'articles.name as NombreArticulo',
+                'articles.url_img as ImgArticulo',
+            )
+            ->get();
+
+        return response()->json([
+            "data" => $orders,
+        ]);
+    }
+
 
     //ACTUALIZAR DATOS DEL USUARIO (PUT) -> NECESITA TOKEN
     public function update_user(Request $request)
