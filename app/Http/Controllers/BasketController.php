@@ -46,35 +46,59 @@ class BasketController extends Controller
     public function store(Request $request)
     {
 
-        //dd($request);
         $request->validate([
             'article_id' => 'required',
             'quantity' => 'required',
         ]);
 
-        $price = Article::where('articles.id', $request->article_id)
-            ->leftjoin('stock', 'stock.id', '=', 'articles.stock_id')
-            ->select(
-                'stock.price as Precio'
-            )->first();
+        $carritos = Basket::where("article_id", $request->article_id)
+            ->where("user_id", $request->user_id)
+            ->first();
 
+        if (isset($carritos)) {
+            $total_quantity = $request->quantity + $carritos->quantity;
 
-        // Convertir el precio y la cantidad a enteros
-        $price = (int)$price->Precio;
-        $quantity = (int)$request->quantity;
+            $price = Article::where('articles.id', $request->article_id)
+                ->leftjoin('stock', 'stock.id', '=', 'articles.stock_id')
+                ->select(
+                    'stock.price as Precio'
+                )->first();
 
-        // Calcular el precio total
-        $total_price = $price * $quantity;
+            // Convertir el precio y la cantidad a enteros
+            $price = (int)$price->Precio;
 
-        //dd($total_price);
+            // Calcular el precio total
+            $total_price = $price * $total_quantity;
 
+            $carritos->update([
+                'quantity' => $total_quantity,
+                'total' => $total_price,
+            ]);
+        } else {
+            //dd($request);
 
-        Basket::create([
-            'article_id' => $request->article_id,
-            'quantity' => $request->quantity,
-            'total' => $total_price,
-            'user_id' => $request->user_id,
-        ]);
+            $price = Article::where('articles.id', $request->article_id)
+                ->leftjoin('stock', 'stock.id', '=', 'articles.stock_id')
+                ->select(
+                    'stock.price as Precio'
+                )->first();
+
+            // Convertir el precio y la cantidad a enteros
+            $price = (int)$price->Precio;
+            $quantity = (int)$request->quantity;
+
+            // Calcular el precio total
+            $total_price = $price * $quantity;
+
+            //dd($total_price);
+
+            Basket::create([
+                'article_id' => $request->article_id,
+                'quantity' => $request->quantity,
+                'total' => $total_price,
+                'user_id' => $request->user_id,
+            ]);
+        }
 
         $userid = $request->user_id;
 
