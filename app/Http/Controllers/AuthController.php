@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\Basket;
 use App\Models\Order;
 use App\Models\Order_Article;
+use App\Models\Stock;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -270,6 +271,86 @@ class AuthController extends Controller
 
         return response()->json([
             "data" => $orders,
+        ]);
+    }
+
+    //CREAR UN PEDIDO (POST) -> NECESITA TOKEN
+    public function create_pedido(Request $request)
+    {
+        $user = Auth::user();
+
+        Order::create([
+            'user_id' => $user->id,
+            'total_price' => $request->total_price,
+            'status' => 1
+        ]);
+
+        $pedido = Order::where('user_id', $user->id)->latest()->first();
+
+
+        /**/
+
+        $productos_raw = $request->basket;
+        //dd($orders_articles);
+        $productos = json_decode($productos_raw, true);
+
+
+        foreach ($productos as $producto) {
+            Order_Article::create([
+                'order_id' => $pedido->id,
+                'article_id' => $producto['article_id'],
+                'quantity' => $producto['quantity'],
+            ]);
+
+            $stock = Stock::where('articles.id', $producto['article_id'])
+                ->leftjoin('articles', 'articles.stock_id', '=', 'stock.id')
+                ->select(
+                    'stock.*'
+                )
+                ->first();
+            $resta = $stock->quantity - $producto['quantity'];
+            $stock->update([
+                'quantity' => $resta
+            ]);
+        }
+
+
+        Basket::where('user_id', $user->id)->delete();
+
+        return response()->json([
+            "message" => "pedido realizado con éxito",
+            "data" => $pedido,
+        ]);
+    }
+
+    //VISUALIZAR PEDIDO ESPECIFICO (POST) -> NECESITA TOKEN
+    public function ver_pedido_especifico(Request $request)
+    {
+        $user = Auth::user();
+
+        $pedido = Order::where('orders.id', $request->pedido_id)
+            ->join('users', 'users.id', '=', 'user_id')
+            ->select(
+                'orders.*',
+                'users.*',
+                'orders.id as OrderId'
+            )
+            ->first();
+
+        $orderArticles = Order_Article::where('order_id', $request->pedido_id)
+            ->join('articles', 'articles.id', '=', 'article_id')
+            ->leftjoin('stock', 'stock.id', '=', 'articles.stock_id')
+            ->select(
+                'orders_articles.*',
+                'articles.*',
+                'stock.price'
+            )
+            ->get();  //Articulos del pedido
+        //dd($orderArticles);
+
+        return response()->json([
+            "Pedido" => $pedido,
+            "ArticulosPedido" => $orderArticles
         ]);
     }
 

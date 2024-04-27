@@ -42,4 +42,6 @@ Route::group([
     Route::delete('eliminarProdCarrito', [AuthController::class, 'eliminarProdCarrito']);
     Route::get('ver_pedidos', [AuthController::class, 'ver_pedidos']);
     Route::get('ver_Detalle_pedido', [AuthController::class, 'ver_Detalle_pedido']);
+    Route::post('create_pedido', [AuthController::class, 'create_pedido']);
+    Route::post('ver_pedido_especifico', [AuthController::class, 'ver_pedido_especifico']);
 });

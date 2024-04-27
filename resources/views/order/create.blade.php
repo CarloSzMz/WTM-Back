@@ -7,7 +7,7 @@
             <div class="container">
                 <img src="{{ asset('assets/img/logos/logo_black.png') }}" alt="" width="150px" class="float-end">
                 <h3>Datos de envío:</h3>
-                <h5>Nombre: {{ $user->name }} {{$user->surname}}</h5>
+                <h5>Nombre: {{ $user->name }} {{ $user->surname }}</h5>
                 <input type="text" hidden name="user_id" value="{{ $user->id }}">
                 <h5>Provincia: {{ $user->provincia }} </h5>
                 <h5>Calle: {{ $user->calle }} </h5>
@@ -39,6 +39,7 @@
                 <br>
                 <button class="btn btn-success" type="submit">Aceptar</button>
                 <button class="btn btn-danger"><a href="{{ route('users.index') }}"></a>Cancelar</button>
+            </div>
         </form>
     </div>
 @endsection
