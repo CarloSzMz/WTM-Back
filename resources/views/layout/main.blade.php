@@ -15,7 +15,7 @@
 
 <body>
     <div id="app ">
-        <nav class="navbar navbar-expand-md navbar-light bg-secondary shadow-sm  text-light ">
+        <nav class="navbar navbar-expand-md navbar-light bg-primary shadow-sm  text-light ">
             <a href="{{ route('users.index') }}"><img src="{{ asset('assets/img/logos/logo_white.png') }}" alt="logo"
                     width="100px"></a>
             <div class="container">
@@ -65,21 +65,68 @@
                 </div>
             </div>
         </nav>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <!-- Navbar content -->
-            <div class="container-md">
-                <a class="navbar-brand" href="{{ route('users.index') }} ">Usuarios</a>
-                <a class="navbar-brand" href="{{ route('article.index') }}">Articulos</a>
-                <a class="navbar-brand" href="{{ route('stock.index') }}">Stock</a>
-                <a class="navbar-brand" href="{{ route('category.index') }}">Categorias</a>
-                <a class="navbar-brand" href="{{ route('order.index') }}">Pedidos</a>
-
-            </div>
-        </nav>
-
-        <main class="py-4" style="background-color: #E3F5F6; height: 100vh;">
-            @include('layout.app')
-        </main>
+        <div class="d-flex flex-row">
+            <nav class="col-md-3 col-lg-2 d-md-block bg-primary sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column mt-4" style="padding-left: 8%;">
+                        <li class="nav-item">
+                            <a class="nav-link active text-dark d-flex flex-row w-100 justify-content-between"
+                                href="{{ route('users.index') }}">
+                                <span class="text-light fw-bold">Usuarios</span>
+                                <i class="gg-user text-light"></i>
+                            </a>
+                        </li>
+                        <hr style="color: black;">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark d-flex flex-row w-100 justify-content-between"
+                                href="#ropaSubmenu" data-bs-toggle="collapse" aria-expanded="false"
+                                id="ropaSubmenuLink">
+                                <span class="text-light fw-bold">Productos</span>
+                                <i class="gg-arrow-down text-light" id="ropaSubmenuIcon"></i>
+                                <!-- Añadimos un ID para identificar este icono -->
+                            </a>
+                            <div class="collapse" id="ropaSubmenu" style="margin-left: 16px;">
+                                <!-- Ajuste de margen izquierdo -->
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link active text-dark d-flex flex-row w-100 justify-content-between"
+                                            href="{{ route('article.index') }}">
+                                            <span class="text-light">Artículos</span>
+                                            <i class="gg-awards"></i>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active text-dark d-flex flex-row w-100 justify-content-between"
+                                            href="{{ route('stock.index') }}">
+                                            <span class="text-light">Stock</span>
+                                            <i class="gg-awards"></i>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active text-dark d-flex flex-row w-100 justify-content-between"
+                                            href="{{ route('category.index') }}">
+                                            <span class="text-light">Categorías</span>
+                                            <i class="gg-awards"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <hr style="color: black;">
+                        <li class="nav-item">
+                            <a class="nav-link active text-dark d-flex flex-row w-100 justify-content-between"
+                                href="{{ route('order.index') }}">
+                                <span class="text-light fw-bold">Pedidos</span>
+                                <i class="gg-notes text-light"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <main class="py-4 w-100" style="background-color: #E3F5F6; height: 100vh;">
+                @include('layout.app')
+            </main>
+        </div>
     </div>
     <!-- Footer -->
     <footer class="sticky-footer bg-secondary">
