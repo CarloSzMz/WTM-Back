@@ -56,7 +56,6 @@ class ArticlesController extends Controller
         //dd($request);
         $request->validate([
             'name' => 'required',
-            'description' => 'required',
             'category_id' => 'required',
             'stock_id' => 'required',
         ]);
