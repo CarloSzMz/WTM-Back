@@ -28,7 +28,8 @@ Route::post('login', [AuthController::class, 'login']);
 Route::get('users', [AuthController::class, 'users']);
 
 //articulos
-Route::get('productos', [AuthController::class, 'productos']);
+Route::post('productos', [AuthController::class, 'productos']);
+Route::get('Detalleproducto', [AuthController::class, 'Detalleproducto']);
 
 Route::group([
     "middleware" => ["auth:api"]

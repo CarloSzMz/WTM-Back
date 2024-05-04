@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Basket;
+use App\Models\Category;
 use App\Models\Order;
 use App\Models\Order_Article;
 use App\Models\Stock;
@@ -25,13 +26,23 @@ class AuthController extends Controller
     }
 
     //DEVUELVE TODOS LOS PRODUCTOS (GET)
-    public function productos()
+    public function productos(Request $request)
     {
-        $productos = Article::get();
 
-        return response()->json([
-            "data" => $productos
-        ]);
+        if ($request->filter == null) {
+            $productos = Article::get();
+            return response()->json([
+                "data" => $productos,
+                "msg" => "sin filtros"
+            ]);
+        } else {
+            $categoria = Category::where('name', $request->filter)->first();
+            $productos = Article::where('category_id', $categoria->id)->get();
+            return response()->json([
+                "data" => $productos,
+                "msg" => "con filtros"
+            ]);
+        }
     }
 
     //REGISTRA USUARIO (POST)
@@ -133,47 +144,63 @@ class AuthController extends Controller
 
         $user = Auth::user();
 
-        //dd($request);
         $request->validate([
             'article_id' => 'required',
             'quantity' => 'required',
         ]);
 
-        $price = Article::where('articles.id', $request->article_id)
-            ->leftjoin('stock', 'stock.id', '=', 'articles.stock_id')
-            ->select(
-                'stock.price as Precio'
-            )->first();
+        $carritos = Basket::where("article_id", $request->article_id)
+            ->where("user_id", $user->id)
+            ->first();
 
+        if (isset($carritos)) {
+            $total_quantity = $request->quantity + $carritos->quantity;
 
-        // Convertir el precio y la cantidad a enteros
-        $price = (int)$price->Precio;
-        $quantity = (int)$request->quantity;
+            $price = Article::where('articles.id', $request->article_id)
+                ->leftjoin('stock', 'stock.id', '=', 'articles.stock_id')
+                ->select(
+                    'stock.price as Precio'
+                )->first();
 
-        // Calcular el precio total
-        $total_price = $price * $quantity;
+            // Convertir el precio y la cantidad a enteros
+            $price = (int)$price->Precio;
 
-        //dd($total_price);
+            // Calcular el precio total
+            $total_price = $price * $total_quantity;
 
+            $carritos->update([
+                'quantity' => $total_quantity,
+                'total' => $total_price,
+            ]);
+        } else {
+            //dd($request);
 
-        Basket::create([
-            'article_id' => $request->article_id,
-            'quantity' => $request->quantity,
-            'total' => $total_price,
-            'user_id' => $user->id,
-        ]);
+            $price = Article::where('articles.id', $request->article_id)
+                ->leftjoin('stock', 'stock.id', '=', 'articles.stock_id')
+                ->select(
+                    'stock.price as Precio'
+                )->first();
 
-        $basket = Basket::where('basket.user_id', $user->id)
-            ->join('articles', 'articles.id', '=', 'basket.article_id')
-            ->select(
-                'basket.*',
-                'articles.name as NombreArticulo'
-            )
-            ->get();
+            // Convertir el precio y la cantidad a enteros
+            $price = (int)$price->Precio;
+            $quantity = (int)$request->quantity;
+
+            // Calcular el precio total
+            $total_price = $price * $quantity;
+
+            //dd($total_price);
+
+            Basket::create([
+                'article_id' => $request->article_id,
+                'quantity' => $request->quantity,
+                'total' => $total_price,
+                'user_id' => $user->id,
+            ]);
+        }
 
         return response()->json([
             "message" => "Producto añadido a la cesta",
-            "cesta" => $basket
+            "cesta" => $carritos
         ]);
     }
 
@@ -387,6 +414,29 @@ class AuthController extends Controller
             "message" => "cesta del usuario actualizada con éxito",
             "user" => $user,
             "basket" => $basket
+        ]);
+    }
+
+
+    //DEVUELVE EL DETALLE DE UN PRODUCTOS (GET)
+    public function Detalleproducto(Request $request)
+    {
+
+        $idArticulo = $request->id;
+
+        $producto = Article::where('articles.id', $idArticulo)
+            ->leftjoin('stock', 'stock.id', '=', 'articles.stock_id')
+            ->select(
+                'articles.*',
+                'stock.price',
+                'stock.quantity'
+            )->get();
+
+
+        return response()->json([
+            "data" => $producto,
+            "msg" => "detalle del producto",
+            "id" => $request->product_id
         ]);
     }
 }
