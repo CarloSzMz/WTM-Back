@@ -34,13 +34,10 @@
                         <div class="form-group">
                             <strong>Descripcion:</strong>
                             <input type="text" name="description"
-                                class="form-control $errors->has('description') ? 'error' : '' "
+                                class="form-control"
                                 placeholder="Descripcion">
 
-                            <!-- Error description Requerido -->
-                            @if ($errors->has('description'))
-                                <p class="text-danger"> {{ $errors->first('description') }}</p>
-                            @endif
+                          
                         </div>
                     </div>
 

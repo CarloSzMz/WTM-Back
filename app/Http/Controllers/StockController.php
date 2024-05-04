@@ -38,10 +38,13 @@ class StockController extends Controller
             'price' => 'required',
         ]);
 
+        $price = str_replace(',', '.', $request->price);
+
+
         Stock::create([
             'name' => $request->name,
             'quantity' => $request->quantity,
-            'price' => $request->price,
+            'price' => $price,
         ]);
 
         return redirect()->route('stock.index')

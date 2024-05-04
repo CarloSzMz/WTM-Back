@@ -48,7 +48,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 p-3">
                         <div class="form-group">
                             <strong>Precio:</strong>
-                            <input type="number" name="price"
+                            <input type="text" step="any" pattern="[0-9]+([\.,][0-9]+)?" name="price"
                                 class="form-control $errors->has('price') ? 'error' : '' ">
 
                             <!-- Error Precio Requerido -->
