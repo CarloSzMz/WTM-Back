@@ -1,6 +1,6 @@
 @extends('layout.styles')
 
-<div>
+<div class="d-flex justify-content-center align-items-center h-100 w-100 bg-primary-subtle">
     <!-- Simplicity is the ultimate sophistication. - Leonardo da Vinci -->
     <div class="container">
         <form action="{{ route('articles.update', $article->id) }}" method="POST">
@@ -67,16 +67,17 @@
                     </div>
 
                     <div class="d-inline-flex row justify-content-center">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                            <button type="submit" class="btn btn-success float-left">Actualizar Artículo</button>
-                            <a class="btn btn-primary float-right" href="{{ route('articles.show', $article->id) }}"
-                                title="Ver Articulo">
-                                Ver {{ $article->name }}
-                            </a>
+                        <div class="d-flex flex-row p-2">
+                            <button type="submit" class="btn btn-success float-left w-50 m-2">Actualizar Artículo</button>
+                            <button class="btn btn-primary w-50 m-2">
+                                <a class="float-right text-light text-decoration-none"
+                                    href="{{ route('articles.show', $article->id) }}" title="Ver Articulo">
+                                    Ver Detalles
+                                </a>
+                            </button>
                         </div>
                     </div>
-                    <a class="mt-3 btn btn-danger float-right" href="{{ route('article.index') }}"
-                        title="Ver Usuarios">
+                    <a class="mt-3 btn btn-danger float-right" href="{{ route('article.index') }}" title="Ver Usuarios">
                         Cancelar </a>
                 </div>
             </section>

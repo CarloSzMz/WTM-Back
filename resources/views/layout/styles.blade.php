@@ -27,4 +27,6 @@
     <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-down.css' rel='stylesheet'>
     <link href='https://unpkg.com/css.gg@2.0.0/icons/css/notes.css' rel='stylesheet'>
     <link href='https://unpkg.com/css.gg@2.0.0/icons/css/shopping-bag.css' rel='stylesheet'>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/box.css' rel='stylesheet'>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/album.css' rel='stylesheet'>
 </head>

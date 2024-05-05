@@ -1,6 +1,6 @@
 @extends('layout.styles')
 
-<div>
+<div class="d-flex justify-content-center align-items-center h-100 w-100 bg-primary-subtle">
     <!-- Simplicity is the ultimate sophistication. - Leonardo da Vinci -->
     <div class="container">
         <form action="{{ route('stock.update', $stock->id) }}" method="POST">
@@ -66,16 +66,8 @@
                         </div>
                     </div>
 
-                    <div class="d-inline-flex row justify-content-center">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-
-                            <button type="submit" class="btn btn-success float-left">Actualizar Stock</button>
-
-                            <a class="btn btn-primary float-right" href="{{ route('stock.show', $stock->id) }}"
-                                title="Ver Usuarios">
-                                Ver {{ $stock->name }}
-                            </a>
-                        </div>
+                    <div class="d-inline-flex row justify-content-center align-items-center">
+                            <button type="submit" class="btn btn-success float-left w-50">Actualizar Stock</button>                           
                     </div>
                     <a class="mt-3 btn btn-danger float-right" href="{{ route('stock.index') }}" title="Ver Stock">
                         Cancelar </a>
