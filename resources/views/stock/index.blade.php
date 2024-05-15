@@ -54,7 +54,7 @@
     </div>
 
     <div class="m-5 text-center d-flex justify-content-center align-items-center">
-        <div class="w-50 bg-light d-flex align-items-center justify-content-center shadow">
+        <div class="w-50 bg-light d-flex align-items-center justify-content-center shadow p-4">
             <canvas id="myPieChart" width="400" height="400"></canvas>
         </div>
     </div>
@@ -68,7 +68,7 @@
         // Crear el gráfico
         const ctx = document.getElementById('myPieChart').getContext('2d');
         const myPieChart = new Chart(ctx, {
-            type: 'pie',
+            type: 'bar',
             data: {
                 labels: nombres,
                 datasets: [{
@@ -105,12 +105,15 @@
                             let label = ctx.chart.data.labels[ctx.dataIndex];
                             return label + ': ' + value; // Formato: 'Nombre: Valor'
                         }
+                    },
+                    legend: {
+                        display: false // Establecemos display en false para ocultar la leyenda
                     }
                 },
                 scales: {
                     y: {
                         beginAtZero: true,
-                        display: false
+                        display: true
                     }
                 }
             }

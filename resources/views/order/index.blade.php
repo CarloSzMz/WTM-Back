@@ -8,13 +8,26 @@
             }
         }
 
-        <style>.dataTables_wrapper {
+        .dataTables_wrapper {
             margin-top: 20px;
             /* Agrega margen en la parte superior de los elementos de DataTables */
         }
+
+        .dataTables_wrapper .dataTables_filter {
+            margin-bottom: 20px;
+        }
+
+        .dt-layout-row {
+            padding-bottom: 20px;
+        }
+
+        .dt-length {
+            display: none;
+        }
     </style>
-    </style>
+
     <div>
+        <!--graficos-->
         <div class="d-flex flex-row w-100 align-items-center justify-between">
             <div class="m-5 d-flex justify-content-center align-items-center">
                 <div class="bg-light shadow" style="max-width: 400px">
@@ -47,8 +60,6 @@
                 </div>
             </div>
         </div>
-        <!--Grafico-->
-
 
         <!--Tabla-->
         <div class="bg-light m-5 shadow">
@@ -62,6 +73,7 @@
                         <th>Usuario</th>
                         <th>Precio Total (€)</th>
                         <th>Estado</th>
+                        <th>Fecha</th>
                         <th>Opciones</th>
                     </thead>
                     <tbody>
@@ -94,6 +106,7 @@
                                 @else
                                     <td>Enviado</td>
                                 @endif
+                                <td>{{ date('d-m-Y', strtotime($order->created_at)) }}</td>
                                 <td>
                                     <form action="{{ route('order.destroy', $order->id) }}" method="POST">
                                         <a class="btn" href="{{ route('order.show', $order->id) }}">
@@ -113,8 +126,7 @@
                                 $month = date('F', strtotime($order->created_at));
                                 // Incrementamos el total del mes correspondiente
                                 $totalsByMonth[$month] += $order->total_price;
-                            @endphp
-                            @php
+
                                 // Inicializamos un array para almacenar los totales por año
                                 $totalsByYear = [];
 
@@ -128,8 +140,7 @@
                                     }
                                     $totalsByYear[$year] += $order->total_price;
                                 }
-                            @endphp
-                            @php
+
                                 // Inicializamos un array para almacenar los totales por trimestre
                                 $totalsByQuarter = [
                                     1 => 0,
@@ -172,12 +183,13 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script type="text/javascript" src="https://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
+
     <!--DataTable Implementation-->
     <script>
         $(document).ready(function() {
             $('.table').DataTable({
                 "paging": true,
-                "pageLength": 15 // Esto establece la paginación de 15 en 15
+                "pageLength": 8,
             });
         });
     </script>
@@ -255,7 +267,6 @@
         const contextotrimestral = document.getElementById('ordersByQuarterChart').getContext('2d');
         const quarters = ['Trimestre 1', 'Trimestre 2', 'Trimestre 3', 'Trimestre 4']; // Nombres de trimestres
         const totalsquarter = @json(array_values($totalsByQuarter));
-        console.log(totalsquarter);
         const ordersByQuarterChart = new Chart(contextotrimestral, {
             type: 'bar',
             data: {
