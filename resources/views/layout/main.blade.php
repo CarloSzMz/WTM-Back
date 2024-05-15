@@ -14,7 +14,7 @@
 -->
 
 <body>
-    <div id="app ">
+    <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-primary shadow-sm  text-light ">
             <a href="{{ route('users.index') }}"><img src="{{ asset('assets/img/logos/logo_white.png') }}" alt="logo"
                     width="100px"></a>
@@ -65,7 +65,7 @@
                 </div>
             </div>
         </nav>
-        <div class="d-flex flex-row">
+        <div class="d-flex flex-row" style="height: 1500px;">
             <nav class="col-md-3 col-lg-2 d-md-block bg-primary sidebar">
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column mt-4" style="padding-left: 8%;">
@@ -81,7 +81,7 @@
                             <a class="nav-link text-dark d-flex flex-row w-100 justify-content-between"
                                 href="#ropaSubmenu" data-bs-toggle="collapse" aria-expanded="false"
                                 id="ropaSubmenuLink">
-                                <span class="text-light fw-bold">Productos</span>
+                                <span class="text-light fw-bold">Almacén</span>
                                 <i class="gg-arrow-down text-light" id="ropaSubmenuIcon"></i>
                                 <!-- Añadimos un ID para identificar este icono -->
                             </a>
@@ -123,19 +123,11 @@
                     </ul>
                 </div>
             </nav>
-            <main class="py-4 w-100" style="background-color: #E3F5F6; height: 100vh;">
+            <main class="py-4 w-100" style="background-color: #E3F5F6; ">
                 @include('layout.app')
             </main>
         </div>
     </div>
-    <!-- Footer -->
-    <footer class="sticky-footer bg-secondary">
-        <div class="container my-auto">
-            <div class="copyright text-center my-auto text-light pt-4 pb-4">
-                <span>Copyright &copy; WTM-backend 2024</span>
-            </div>
-        </div>
-    </footer>
 </body>
 
 </html>
