@@ -3,9 +3,11 @@
 use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\UserController;
+use App\Models\Discount;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -57,3 +59,8 @@ Route::get('/basket/create/{userid}', [BasketController::class, 'create'])->name
 Route::resource('order', OrdersController::class);
 Route::get('/order', [OrdersController::class, 'index'])->name('order.index');
 Route::get('/order/create/{userid}', [OrdersController::class, 'create'])->name('order.create');
+
+//Discount
+
+Route::resource('discount', DiscountController::class);
+Route::get('/discount', [DiscountController::class, 'index'])->name('discount.index');

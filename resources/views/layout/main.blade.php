@@ -92,21 +92,24 @@
                                         <a class="nav-link active text-dark d-flex flex-row w-100 justify-content-between"
                                             href="{{ route('article.index') }}">
                                             <span class="text-light">Artículos</span>
-                                            <i class="gg-awards"></i>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link active text-dark d-flex flex-row w-100 justify-content-between"
                                             href="{{ route('stock.index') }}">
                                             <span class="text-light">Stock</span>
-                                            <i class="gg-awards"></i>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link active text-dark d-flex flex-row w-100 justify-content-between"
                                             href="{{ route('category.index') }}">
                                             <span class="text-light">Categorías</span>
-                                            <i class="gg-awards"></i>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active text-dark d-flex flex-row w-100 justify-content-between"
+                                            href="{{ route('discount.index') }}">
+                                            <span class="text-light">Descuentos</span>
                                         </a>
                                     </li>
                                 </ul>
