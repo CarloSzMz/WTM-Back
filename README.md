@@ -1,5 +1,4 @@
 <p align="center">Wear The Message</p>
-![logo_white](https://github.com/user-attachments/assets/51c54fee-f75c-4f06-92b2-6cb81a0454cf)
 
 ## About WTM
 
